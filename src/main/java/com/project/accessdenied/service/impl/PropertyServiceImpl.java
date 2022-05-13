@@ -82,7 +82,7 @@ public class PropertyServiceImpl implements PropertyService {
             }
         }).limit(10).collect(Collectors.toList());
 */
-        return propertyRepository.findTop10ByNameOrderByLastRentedDateDesc();
+        return propertyRepository.findTop10ByOrderByLastRentedDateDesc();
     }
 
     @Override

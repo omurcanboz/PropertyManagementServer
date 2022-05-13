@@ -17,7 +17,7 @@ public interface PropertyRepository extends CrudRepository<Property, Integer> {
     Property findById(long id);
     void deleteById(long id);
     //display top 10 order by last rented date desc
-    List<Property> findTop10ByNameOrderByLastRentedDateDesc();
+    List<Property> findTop10ByOrderByLastRentedDateDesc();
     //List<Property> findAllByOccupiedIs(Boolean b);
     //List<Property> findAllByNumberOfBedroomsIsGreaterThanEqual(int rn);
     //List<Property> findAllByCity(City c);
