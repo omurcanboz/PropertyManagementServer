@@ -3,6 +3,7 @@ package com.project.accessdenied.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,9 +17,10 @@ public class Property {
     private String name;
     private int numberOfBedrooms;
     private int numberOfBathrooms;
-    private int rentAmount;
-    private int securityDepositAmount;
+    private float rentAmount;
+    private float securityDepositAmount;
     private boolean isOccupied;
+    private LocalDate lastRentedDate;
 
     @ElementCollection
     private List<String> photos;

@@ -71,7 +71,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public List<Property> getLastTenRented() {
-        LocalDate now= LocalDate.now();
+        /*LocalDate now= LocalDate.now();
         return propertyRepository.findAll().stream().sorted(new Comparator<Property>() {
             @Override
             public int compare(Property o1, Property o2) {
@@ -81,7 +81,8 @@ public class PropertyServiceImpl implements PropertyService {
                 return (int) ChronoUnit.DAYS.between(o1min , o2min);
             }
         }).limit(10).collect(Collectors.toList());
-
+*/
+        return propertyRepository.findTop10ByOrderByLastRentedDateDesc();
     }
 
     @Override
