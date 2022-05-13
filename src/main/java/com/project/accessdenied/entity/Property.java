@@ -34,4 +34,7 @@ public class Property {
     @OneToMany
     private List<RentPeriod> rentPeriods;
 
+    @OneToOne
+    PropertyType propertyType;
+
 }
