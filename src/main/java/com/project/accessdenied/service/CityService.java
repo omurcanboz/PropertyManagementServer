@@ -1,11 +1,13 @@
 package com.project.accessdenied.service;
 
 import com.project.accessdenied.entity.City;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface CityService {
-    public List<City> getAll();
-    public City getById(int id);
-    int totalIncomeOfCity(int id);
+    List<City> getAll();
+    City getById(long id);
+    float totalIncomeOfCity(long id);
 }

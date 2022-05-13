@@ -1,13 +1,10 @@
-package com.project.accessdenied.service.implementation;
+package com.project.accessdenied.service.impl;
 
 import com.project.accessdenied.entity.City;
 import com.project.accessdenied.entity.Property;
 import com.project.accessdenied.entity.State;
-import com.project.accessdenied.repo.PropertyRepo;
-import com.project.accessdenied.service.CityService;
+import com.project.accessdenied.repository.PropertyRepository;
 import com.project.accessdenied.service.PropertyService;
-import com.project.accessdenied.service.StateService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,79 +15,64 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService {
-    private final PropertyRepo propertyRepo;
-    private final CityService cityService;
-    private final StateService stateService;
+    private final PropertyRepository propertyRepository;
+
+    public PropertyServiceImpl(PropertyRepository propertyRepository) {
+        this.propertyRepository = propertyRepository;
+    }
+
 
     @Override
-    public Property save(Property p) {
-        return propertyRepo.save(p);
+    public void save(Property p) {
+        propertyRepository.save(p);
     }
 
     @Override
-    public void deleteById(int id) {
-        propertyRepo.deleteById(id);
+    public void deleteById(long id) {
+        propertyRepository.deleteById(id);
     }
 
     @Override
     public List<Property> getAll() {
-        return propertyRepo.findAll();
+        return propertyRepository.findAll();
     }
 
     @Override
-    public Property getById(int id) {
-        Property p=new Property();
-        propertyRepo.findById(id).ifPresentOrElse(
-                value -> {
-                    p.setId(value.getId());
-                    p.setName(value.getName());
-                    p.setCity(value.getCity());
-                    p.setLastRentedBy(value.getLastRentedBy());
-                    p.setOccupied(value.isOccupied());
-                    p.setNumberOfBathrooms(value.getNumberOfBathrooms());
-                    p.setNumberOfBedrooms(value.getNumberOfBedrooms());
-                    p.setRentAmount(value.getRentAmount());
-                    p.setPhotos(value.getPhotos());
-                    p.setSecurityDepositAmount(value.getSecurityDepositAmount());
-                    p.setOwnedBy(value.getOwnedBy());
-                    p.setRentPeriods(value.getRentPeriods());
-                    p.setState(value.getState());
-                },
-                () -> { //default city when not found
-                    p.setId(0);
-                }
-        );
-        return p;
+    public Property getById(long id) {
+        return propertyRepository.findById(id);
     }
 
     @Override
-    public List<Property> getAllByOccupiedIs(Boolean b) {
-        return propertyRepo.findAllByOccupiedIs(true);
+    public List<Property> getAllByOccupiedIs(boolean b) {
+        return null;
+        //return propertyRepository.findAllByOccupiedIs(true);
     }
 
     @Override
     public List<Property> getAllByNumberOfBedroomsIsGreaterThanEqual(int rn) {
-        return propertyRepo.findAllByNumberOfBedroomsIsGreaterThanEqual(rn);
+       return null;
+        // return propertyRepository.findAllByNumberOfBedroomsIsGreaterThanEqual(rn);
     }
 
     @Override
-    public List<Property> getAllByCity(int id) {
-        City c=cityService.getById(id);
-        return propertyRepo.findAllByCity(c);
+    public List<Property> getAllByCity(long id) {
+        return null;
+        //City c=cityService.getById(id);
+       // return propertyRepository.findAllByCity(c);
     }
 
     @Override
-    public List<Property> getAllByState(int id) {
-        State s= stateService.getById(id);
-        return propertyRepo.findAllByState(s);
+    public List<Property> getAllByState(long id) {
+        return  null;
+       // State s= stateService.getById(id);
+       // return propertyRepository.findAllByState(s);
     }
 
     @Override
     public List<Property> getLastTenRented() {
         LocalDate now= LocalDate.now();
-        return propertyRepo.findAll().stream().sorted(new Comparator<Property>() {
+        return propertyRepository.findAll().stream().sorted(new Comparator<Property>() {
             @Override
             public int compare(Property o1, Property o2) {
                 LocalDate o1min=o1.getRentPeriods().stream().map(rp->rp.getRentedAt()).min(Comparator.comparingLong(date -> ChronoUnit.DAYS.between(now , date))).orElse(LocalDate.of(1900, 1, 1));
@@ -105,7 +87,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<Property> getLeaseEndComing() {
         LocalDate endOfMonth = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
-        return propertyRepo.findAll().stream().sorted(new Comparator<Property>() {
+        return propertyRepository.findAll().stream().sorted(new Comparator<Property>() {
             @Override
             public int compare(Property o1, Property o2) {
                 LocalDate o1min=o1.getRentPeriods().stream().map(rp->rp.getRentedAt()).min(Comparator.comparingLong(date -> ChronoUnit.DAYS.between(endOfMonth , date))).orElse(LocalDate.of(1900, 1, 1));

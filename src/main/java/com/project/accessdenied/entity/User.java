@@ -8,19 +8,23 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String email;
-    String firstName;
-    String lastname;
-    String password;
-    //Role role;
-    LocalDateTime LastLoggedInAt;
-    Boolean active;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String email;
+    private String firstName;
+    private String lastname;
+    private String password;
+    private LocalDateTime lastLoggedInAt;
+    private boolean isActive;
+
     @OneToMany
-    List<Property> properties;
+    private List<Property> properties;
+
+    @OneToOne
+    private Role role;
 
 }

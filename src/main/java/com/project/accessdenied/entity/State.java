@@ -9,13 +9,14 @@ import java.util.List;
 @Data
 public class State {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String name;
-    @ManyToOne
-    City city;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
 
-    @OneToMany
-    List<Property> properties;
+
+    @OneToOne(mappedBy = "state")
+    private City city;
+
+
 
 }

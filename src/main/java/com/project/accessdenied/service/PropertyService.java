@@ -3,18 +3,20 @@ package com.project.accessdenied.service;
 import com.project.accessdenied.entity.City;
 import com.project.accessdenied.entity.Property;
 import com.project.accessdenied.entity.State;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface PropertyService {
-    Property save(Property p);
-    void deleteById(int id);
+    void save(Property p);
+    void deleteById(long id);
     List<Property> getAll();
-    Property getById(int id);
-    List<Property> getAllByOccupiedIs(Boolean b);
-    List<Property> getAllByNumberOfBedroomsIsGreaterThanEqual(int rn);
-    List<Property> getAllByCity(int id);
-    List<Property> getAllByState(int id);
+    Property getById(long id);
+    List<Property> getAllByOccupiedIs(boolean b);
+    List<Property> getAllByNumberOfBedroomsIsGreaterThanEqual(int roomNum);
+    List<Property> getAllByCity(long id);
+    List<Property> getAllByState(long id);
     //admin
     List<Property> getLastTenRented();
     //landlord

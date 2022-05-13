@@ -10,11 +10,12 @@ import java.util.List;
 @Data
 public class RentPeriod {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    LocalDate rentedAt;
-    LocalDate rentStarts;
-    LocalDate rentEnds;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private LocalDate rentedAt;
+    private LocalDate rentStarts;
+    private LocalDate rentEnds;
     @OneToOne
-    User tenant;
+    private User tenant;
 
 }

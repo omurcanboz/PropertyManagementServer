@@ -9,11 +9,16 @@ import java.util.List;
 @Data
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String name;
-    @OneToMany
-    List<State> states;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private int zipCode;
+
+    @OneToOne
+    private State state;
+
+    @OneToMany(mappedBy = "city")
+    private List<Property> properties;
 
 
 }

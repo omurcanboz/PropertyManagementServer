@@ -11,27 +11,25 @@ import java.util.List;
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String name;
-    int numberOfBedrooms;
-    int numberOfBathrooms;
-    int rentAmount;
-    int securityDepositAmount;
-    boolean isOccupied;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private int numberOfBedrooms;
+    private int numberOfBathrooms;
+    private int rentAmount;
+    private int securityDepositAmount;
+    private boolean isOccupied;
 
     @ElementCollection
-    List<String> photos;
+    private List<String> photos;
     @ManyToOne
-    User ownedBy;
+    private User ownedBy;
     @OneToOne
-    User lastRentedBy;
+    private User lastRentedBy;
     @ManyToOne
-    City city;
-    @ManyToOne
-    State state;
+    private City city;
     //addition
     @OneToMany
-    List<RentPeriod> rentPeriods;
+    private List<RentPeriod> rentPeriods;
 
 }

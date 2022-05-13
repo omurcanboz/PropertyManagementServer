@@ -1,4 +1,4 @@
-package com.project.accessdenied.repo;
+package com.project.accessdenied.repository;
 
 import com.project.accessdenied.entity.State;
 import org.springframework.data.repository.CrudRepository;
@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface StateRepo extends CrudRepository<State, Integer> {
-    @Override
-    List<State> findAll();
+public interface StateRepository extends CrudRepository<State, Integer> {
 
-    @Override
-    Optional<State> findById(Integer integer);
+    List<State> findAll();
+    State findById(long id);
 }

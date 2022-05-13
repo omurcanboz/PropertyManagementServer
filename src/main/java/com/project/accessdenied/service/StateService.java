@@ -1,12 +1,14 @@
 package com.project.accessdenied.service;
 
 import com.project.accessdenied.entity.State;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface StateService {
-    public List<State> getAll();
-    State getById(int id);
-    int totalIncomeOfState(int id);
+    List<State> getAll();
+    State getById(long id);
+    float totalIncomeOfState(long id);
 
 }
