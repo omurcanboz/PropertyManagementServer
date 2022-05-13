@@ -3,6 +3,8 @@ package com.project.accessdenied.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,11 +20,18 @@ public class Property {
     int securityDepositAmount;
     boolean isOccupied;
 
-    //List<String> photos;
+    @ElementCollection
+    List<String> photos;
     @ManyToOne
     User ownedBy;
     @OneToOne
     User lastRentedBy;
-
+    @ManyToOne
+    City city;
+    @ManyToOne
+    State state;
+    //addition
+    @OneToMany
+    List<RentPeriod> rentPeriods;
 
 }
