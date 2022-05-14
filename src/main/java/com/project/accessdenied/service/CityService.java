@@ -9,5 +9,6 @@ import java.util.List;
 public interface CityService {
     List<City> getAll();
     City getById(long id);
+    List<City> getByState(long id);
     float totalIncomeOfCity(long id);
 }

@@ -1,10 +1,10 @@
 package com.project.accessdenied.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -29,9 +29,11 @@ public class Property {
     @OneToOne
     private User lastRentedBy;
     @ManyToOne
+    @JsonIgnore
     private City city;
     //addition
     @OneToMany
+    @JsonIgnore
     private List<RentPeriod> rentPeriods;
 
     @OneToOne

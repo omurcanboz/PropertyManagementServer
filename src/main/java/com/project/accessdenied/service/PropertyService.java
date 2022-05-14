@@ -1,8 +1,6 @@
 package com.project.accessdenied.service;
 
-import com.project.accessdenied.entity.City;
 import com.project.accessdenied.entity.Property;
-import com.project.accessdenied.entity.State;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

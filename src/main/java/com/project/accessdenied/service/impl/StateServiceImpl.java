@@ -5,6 +5,7 @@ import com.project.accessdenied.repository.StateRepository;
 import com.project.accessdenied.service.StateService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,12 +18,15 @@ public class StateServiceImpl implements StateService {
 
     @Override
     public List<State> getAll() {
-        return stateRepository.findAll();
+
+        var result = new ArrayList<State>();
+        stateRepository.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
     public State getById(long id) {
-        return stateRepository.findById(id);
+        return stateRepository.findById(id).get();
     }
 
     @Override

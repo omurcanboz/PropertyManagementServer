@@ -5,6 +5,7 @@ import com.project.accessdenied.repository.CityRepository;
 import com.project.accessdenied.service.CityService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,12 +18,19 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<City> getAll() {
-        return cityRepository.findAll();
+        var result = new ArrayList<City>();
+        cityRepository.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
     public City getById(long id) {
-        return cityRepository.findById(id);
+        return cityRepository.findById(id).get();
+    }
+
+    @Override
+    public List<City> getByState(long id) {
+        return cityRepository.findAllByState(id);
     }
 
     @Override

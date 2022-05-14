@@ -1,18 +1,12 @@
 package com.project.accessdenied.service.impl;
 
-import com.project.accessdenied.entity.City;
 import com.project.accessdenied.entity.Property;
-import com.project.accessdenied.entity.State;
 import com.project.accessdenied.repository.PropertyRepository;
 import com.project.accessdenied.service.PropertyService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
@@ -35,12 +29,15 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public List<Property> getAll() {
-        return propertyRepository.findAll();
+        var result = new ArrayList<Property>();
+        propertyRepository.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
     public Property getById(long id) {
-        return propertyRepository.findById(id);
+
+        return propertyRepository.findById(id).get();
     }
 
     @Override
@@ -87,7 +84,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public List<Property> getLeaseEndComing() {
-        LocalDate endOfMonth = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+        /*LocalDate endOfMonth = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
         return propertyRepository.findAll().stream().sorted(new Comparator<Property>() {
             @Override
             public int compare(Property o1, Property o2) {
@@ -97,5 +94,8 @@ public class PropertyServiceImpl implements PropertyService {
                 return (int) ChronoUnit.DAYS.between(o1min , o2min);
             }
         }).limit(10).collect(Collectors.toList());
+
+         */
+        return null;
     }
 }

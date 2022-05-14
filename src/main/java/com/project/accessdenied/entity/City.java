@@ -12,7 +12,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private int zipCode;
+    //private int zipCode;
 
     @OneToOne
     private State state;
