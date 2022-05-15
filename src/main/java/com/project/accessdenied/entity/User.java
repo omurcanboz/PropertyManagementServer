@@ -21,7 +21,7 @@ public class User {
     private LocalDateTime lastLoggedInAt;
     private boolean isActive;
 
-    @OneToMany
+    @OneToMany(mappedBy = "ownedBy")
     private List<Property> properties;
 
     @OneToOne
