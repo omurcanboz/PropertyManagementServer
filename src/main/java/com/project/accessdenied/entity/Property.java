@@ -1,7 +1,9 @@
 package com.project.accessdenied.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@CrossOrigin
 public class Property {
 
     @Id
@@ -25,15 +28,15 @@ public class Property {
     @ElementCollection
     private List<String> photos;
     @ManyToOne
+    @JsonIgnore
     private User ownedBy;
     @OneToOne
     private User lastRentedBy;
-    @ManyToOne
-    @JsonIgnore
+
+    @OneToOne
     private City city;
     //addition
     @OneToMany
-    @JsonIgnore
     private List<RentPeriod> rentPeriods;
 
     @OneToOne

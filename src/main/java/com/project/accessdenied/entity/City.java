@@ -1,5 +1,6 @@
 package com.project.accessdenied.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,9 +17,5 @@ public class City {
 
     @OneToOne
     private State state;
-
-    @OneToMany(mappedBy = "city")
-    private List<Property> properties;
-
 
 }

@@ -30,7 +30,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<City> getByState(long id) {
-        return cityRepository.findAllByState(id);
+        return null;
+        //return cityRepository.findAllByState(id);
     }
 
     @Override

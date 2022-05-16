@@ -1,5 +1,6 @@
 package com.project.accessdenied.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class User {
     private boolean isActive;
 
     @OneToMany(mappedBy = "ownedBy")
+    @JsonIgnore
     private List<Property> properties;
 
     @OneToOne
