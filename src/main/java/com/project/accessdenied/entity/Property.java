@@ -3,6 +3,7 @@ package com.project.accessdenied.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
@@ -24,6 +25,8 @@ public class Property {
     private float securityDepositAmount;
     private boolean isOccupied;
     private LocalDate lastRentedDate;
+    private LocalDate endDate;
+    private Boolean isDeleted;
 
     @ElementCollection
     private List<String> photos;
@@ -36,8 +39,6 @@ public class Property {
     @OneToOne
     private City city;
     //addition
-    @OneToMany
-    private List<RentPeriod> rentPeriods;
 
     @OneToOne
     PropertyType propertyType;
