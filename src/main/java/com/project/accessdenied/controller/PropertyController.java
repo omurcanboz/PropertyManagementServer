@@ -60,7 +60,10 @@ public class PropertyController {
     public List<RentedDto> getLastWeekRented() {
         return propertyService.getLastWeekRented();
     }
-
+    @GetMapping("/num-of-properties/{id}")
+    public List<RentedDto> getLastWeekRentedById(@PathVariable long id) {
+        return propertyService.getLastWeekRentedByID(id);
+    }
     @PostMapping
     public void save(@RequestBody Property property) {
         propertyService.save(property);

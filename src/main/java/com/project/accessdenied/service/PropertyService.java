@@ -24,6 +24,8 @@ public interface PropertyService {
     List<PropertyDto> getTotalIncomePerUser(long id);
     List<Property> getLeases(LocalDate today, LocalDate nextMonth);
     List<RentedDto> getLastWeekRented();
+
+    List<RentedDto> getLastWeekRentedByID(long id);
     //landlord
     List<Property> getLeaseEndComing();
 

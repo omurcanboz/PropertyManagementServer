@@ -172,6 +172,43 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    public List<RentedDto> getLastWeekRentedByID(long id) {
+
+            LocalDate today = LocalDate.now();
+
+            LocalDate lastWeek = today.minusDays(7);
+
+            var entity = propertyRepository.findAllByOwnedBy_IdEqualsAndLastRentedDateGreaterThanAndLastRentedDateLessThan(id,lastWeek, today);
+
+            var result = new ArrayList<RentedDto>();
+
+            Map<String, Integer> dayMap = new HashMap<>();
+
+            entity.forEach(e -> {
+                DayOfWeek day = e.getLastRentedDate().getDayOfWeek();
+                String dayOfWeek = day.name();
+                if(dayMap.get(dayOfWeek) == null) {
+                    dayMap.put(dayOfWeek, 1);
+                } else {
+                    int res = dayMap.get(dayOfWeek);
+                    res++;
+                    dayMap.put(dayOfWeek, res);
+                }
+            });
+
+            for (String day :dayMap.keySet()) {
+                int count = dayMap.get(day);
+                RentedDto dto = new RentedDto();
+                dto.setDay(day);
+                dto.setRented(count);
+                result.add(dto);
+            }
+
+            return result;
+        }
+
+
+    @Override
     public List<Property> getLeaseEndComing() {
         /*LocalDate endOfMonth = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
         return propertyRepository.findAll().stream().sorted(new Comparator<Property>() {

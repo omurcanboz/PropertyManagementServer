@@ -16,6 +16,8 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
     List<Property> findAllByIsOccupiedEqualsAndEndDateGreaterThanAndEndDateLessThan(boolean val, LocalDate today, LocalDate nextMonth);
     List<Property> findAllByOwnedBy_IdEquals(long id);
     List<Property> findAllByLastRentedDateGreaterThanAndLastRentedDateLessThan(LocalDate lastWeek, LocalDate today);
+
+    List<Property> findAllByOwnedBy_IdEqualsAndLastRentedDateGreaterThanAndLastRentedDateLessThan(long id,LocalDate lastWeek, LocalDate today);
     //List<Property> findAllByOccupiedIs(Boolean b);
     //List<Property> findAllByNumberOfBedroomsIsGreaterThanEqual(int rn);
     //List<Property> findAllByCity(City c);
