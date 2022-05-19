@@ -19,6 +19,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     public PropertyServiceImpl(PropertyRepository propertyRepository) {
         this.propertyRepository = propertyRepository;
+
     }
 
 
@@ -131,8 +132,9 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<Property> getLeases(LocalDate today, LocalDate nextMonth) {
-
+    public List<Property> getLeases() {
+        LocalDate today = LocalDate.now();
+        LocalDate nextMonth = today.plusMonths(1);
         return propertyRepository.findAllByIsOccupiedEqualsAndEndDateGreaterThanAndEndDateLessThan(true, today,nextMonth);
     }
 
@@ -224,4 +226,13 @@ public class PropertyServiceImpl implements PropertyService {
          */
         return null;
     }
+
+    @Override
+    public List<Property> getByOwner(Long id) {
+        return propertyRepository.findAllByOwnedBy_IdEquals(id);
+    }
+
+
+
+
 }

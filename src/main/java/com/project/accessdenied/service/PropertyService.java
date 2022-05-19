@@ -3,6 +3,7 @@ package com.project.accessdenied.service;
 import com.project.accessdenied.dto.PropertyDto;
 import com.project.accessdenied.dto.RentedDto;
 import com.project.accessdenied.entity.Property;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,11 +23,14 @@ public interface PropertyService {
     List<Property> getLastTenRented();
     float getTotalIncomePerLocation(long id);
     List<PropertyDto> getTotalIncomePerUser(long id);
-    List<Property> getLeases(LocalDate today, LocalDate nextMonth);
+    List<Property> getLeases();
     List<RentedDto> getLastWeekRented();
 
     List<RentedDto> getLastWeekRentedByID(long id);
     //landlord
     List<Property> getLeaseEndComing();
+
+    List<Property> getByOwner(Long id);
+
 
 }

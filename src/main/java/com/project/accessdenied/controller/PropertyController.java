@@ -1,5 +1,6 @@
 package com.project.accessdenied.controller;
 
+import com.project.accessdenied.dto.Pid;
 import com.project.accessdenied.dto.PropertyDto;
 import com.project.accessdenied.dto.RentedDto;
 import com.project.accessdenied.entity.Property;
@@ -23,6 +24,12 @@ public class PropertyController {
     public List<Property> getAll() {
         return propertyService.getAll();
     }
+
+    @GetMapping("/owner/{id}")
+    public List<Property> getAllByOwner(@PathVariable long id) {
+        return propertyService.getByOwner(id);
+    }
+
 
     @GetMapping("/{id}")
     public Property getById(@PathVariable long id) {
@@ -48,11 +55,7 @@ public class PropertyController {
     @GetMapping("/leases")
     public List<Property> getTenPropertiesEndInMonth(){
 
-        LocalDate today = LocalDate.now();
-
-        LocalDate newDate = today.plusMonths(1);
-
-        return propertyService.getLeases(today, newDate);
+        return propertyService.getLeases();
 
     }
 
@@ -64,13 +67,16 @@ public class PropertyController {
     public List<RentedDto> getLastWeekRentedById(@PathVariable long id) {
         return propertyService.getLastWeekRentedByID(id);
     }
+
     @PostMapping
     public void save(@RequestBody Property property) {
         propertyService.save(property);
     }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
-        propertyService.deleteById(id);
+    @PostMapping("/delete")
+    public void delete(@RequestBody Pid pid) { //@RequestBody long id
+        //System.out.println(pid);
+       propertyService.deleteById(pid.getId());
     }
+    //filter
+
 }
