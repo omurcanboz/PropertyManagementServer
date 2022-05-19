@@ -31,7 +31,6 @@ public class Property {
     @ElementCollection
     private List<String> photos;
     @ManyToOne
-    @JsonIgnore
     private User ownedBy;
     @OneToOne
     private User lastRentedBy;
